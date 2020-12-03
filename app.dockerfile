@@ -1,13 +1,13 @@
 FROM golang:alpine
 
-RUN mkdir /locator
+RUN mkdir /learning
 
-ADD . /locator
+ADD . /learning
 
-WORKDIR /locator
+WORKDIR /learning
 
 RUN go mod download
 
 RUN go get github.com/githubnemo/CompileDaemon
 
-ENTRYPOINT ["CompileDaemon", "--directory=/locator",  "--command=/locator/locator-api"]
+ENTRYPOINT ["CompileDaemon", "--directory=/learning",  "--command=/learning/learning-api"]

@@ -8,7 +8,7 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - .:/locator
+      - .:/learning
     env_file: .env
     depends_on:
       - database
@@ -24,11 +24,11 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: locator
+      MYSQL_DATABASE: learning
     ports:
       - 33066:3306
     volumes:
-      - locatordata:/var/lib/mysql 
+      - learningdata:/var/lib/mysql 
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -42,4 +42,4 @@ services:
 
 # persisted storage
 volumes:
-  locatordata:
+  learningdata:
