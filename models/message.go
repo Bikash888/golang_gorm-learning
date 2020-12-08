@@ -4,7 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-//Twilio model
+//Message model
 type Message struct {
 	gorm.Model
 	message string
