@@ -1,6 +1,9 @@
 package infrastructure
 
 import (
+	"locator-api/api/routes"
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -15,5 +18,13 @@ func SetupRoutes(db *gorm.DB) {
 		AllowHeaders:     []string{"*"},
 		AllowCredentials: true,
 	}))
+	routes.TwilioRoutes(httpRouter.Group("send"), db)
+
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		httpRouter.Run()
+	} else {
+		httpRouter.Run(os.Getenv("SERVER_PORT"))
+	}
 
 }

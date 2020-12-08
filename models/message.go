@@ -7,5 +7,5 @@ import (
 //Message model
 type Message struct {
 	gorm.Model
-	message string
+	Message string `json:"message"`
 }
