@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"locator-api/api/service"
 	"locator-api/models"
 	"net/http"
@@ -26,7 +25,6 @@ func NewMessageController(service service.MessageService) MessageController {
 
 func (sc *smsController) SaveAndSendMessage(c *gin.Context) {
 	var messageModel models.Message
-	fmt.Println(".....................>>>.", messageModel)
 	err := c.ShouldBind(&messageModel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -35,13 +33,13 @@ func (sc *smsController) SaveAndSendMessage(c *gin.Context) {
 		})
 	}
 	sendSms, err := sc.messageService.SendMessage(&messageModel)
-	// if err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{
-	// 		"message": "error",
-	// 		"error":   err,
-	// 	})
-	// 	return
-	// }
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "error",
+			"error":   err,
+		})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": sendSms,
 	})

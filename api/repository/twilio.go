@@ -31,7 +31,7 @@ func (m *messageRepository) SendMessage(message *models.Message) (*models.Messag
 	authToken := get("TWILIO_TOKEN")
 	client := twilio.NewClient(sid, authToken, nil)
 	if client != nil {
-		msg, err := client.Messages.SendMessage("+12513561672", "+9779860024165", "This is test", nil)
+		msg, err := client.Messages.SendMessage("+19293251726", "+9779813228397", message.SMS, nil)
 		if err != nil && msg != nil {
 			fmt.Println("message sent", userMsg)
 			m.DB.Create(&message)
