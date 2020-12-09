@@ -7,7 +7,6 @@ import (
 
 func main() {
 	utils.LoadEnv()
-
 	db := infrastructure.SetupModels()
 	infrastructure.SetupRoutes(db)
 }

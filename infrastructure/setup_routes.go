@@ -19,7 +19,8 @@ func SetupRoutes(db *gorm.DB) {
 		AllowCredentials: true,
 	}))
 	routes.TwilioRoutes(httpRouter.Group("send"), db)
-
+	routes.PostRoutes(httpRouter.Group("post"), db)
+	routes.CommentRoutes(httpRouter.Group("comment"), db)
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
 		httpRouter.Run()
