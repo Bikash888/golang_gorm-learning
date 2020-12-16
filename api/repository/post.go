@@ -24,8 +24,7 @@ func NewPostRepository(db *gorm.DB) PostRepository {
 }
 func (p *postRepository) FindPostByID(id int) (*models.Posts, error) {
 	var post models.Posts
-	fmt.Println("id--------<<<<<>>>>>>>", id)
-	result := p.DB.Where("id=?", id).First(&post)
+	result := p.DB.Where("id=?", id).Preload("Comment").First(&post)
 	if result.Error != nil {
 		err := result.Error
 		fmt.Println("Error>>", err)
