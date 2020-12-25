@@ -19,5 +19,5 @@ func PostRoutes(routes *gin.RouterGroup, db *gorm.DB) {
 	postService := service.NewPostService(postRepo)
 	postController := controllers.NewPostController(postService)
 	routes.GET("/:id", postController.FindPostByID)
-	routes.GET("/all",pos)
+	routes.GET("/", postController.FindAllPost)
 }

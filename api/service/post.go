@@ -10,7 +10,7 @@ import (
 //PostService ..
 type PostService interface {
 	FindPostDataByID(id string) (*models.Posts, error)
-	FindPostData(posts *models.Posts)(*models.Posts,error)
+	FindPostData(posts *models.Posts, pagination *models.Pagination) (*[]models.Posts, int64, error)
 }
 
 type postService struct {
@@ -31,6 +31,6 @@ func (ps *postService) FindPostDataByID(id string) (*models.Posts, error) {
 	}
 	return ps.repository.FindPostByID(convertedID)
 }
-func (ps *postService) FindPostData(posts *models.Posts)(*models.Posts,error){
-	return ps.repository.FindAllPost(posts)
+func (ps *postService) FindPostData(posts *models.Posts, pagination *models.Pagination) (*[]models.Posts, int64, error) {
+	return ps.repository.FindAllPost(posts, pagination)
 }
