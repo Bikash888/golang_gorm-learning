@@ -10,6 +10,7 @@ import (
 //PostRepository ..
 type PostRepository interface {
 	FindPostByID(id int) (*models.Posts, error)
+	FindAllPost()([]models.Posts,error)
 	Migrate() error
 }
 
@@ -40,4 +41,14 @@ func (p *postRepository) Migrate() error {
 	}
 	return nil
 
+}
+
+func (p *postRepository)FindAllPost()([]models.Posts,error){
+	var post  []models.Posts
+	result :=p.DB.Find(&post)
+	if result.Error !=nil{
+		msg :=result.Error
+		return nil,msg
+	}
+	return post,nil
 }

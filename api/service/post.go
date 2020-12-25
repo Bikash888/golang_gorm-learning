@@ -10,6 +10,7 @@ import (
 //PostService ..
 type PostService interface {
 	FindPostDataByID(id string) (*models.Posts, error)
+	FindPostData(posts *models.Posts)(*models.Posts,error)
 }
 
 type postService struct {
@@ -29,4 +30,7 @@ func (ps *postService) FindPostDataByID(id string) (*models.Posts, error) {
 		fmt.Println("Erorr In converting Id")
 	}
 	return ps.repository.FindPostByID(convertedID)
+}
+func (ps *postService) FindPostData(posts *models.Posts)(*models.Posts,error){
+	return ps.repository.FindAllPost(posts)
 }
